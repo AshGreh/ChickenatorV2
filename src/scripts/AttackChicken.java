@@ -17,18 +17,19 @@ public class AttackChicken extends Task<ClientContext> {
     Tile se = new Tile(3210, 3285, 0);
     Tile sw = new Tile(3204, 3285, 0);
 
-    int[] chickenIds = new int[]{1017, 41};
+    final int chickenIds[]  = {1017, 41};
+    private Npc chicken;
 
     @Override
     public boolean activate() {
+        chicken = ctx.npcs.select().id(chickenIds).nearest().poll();
         return
                 !ctx.npcs.within(new Area(nw, se)).id(chickenIds).select().isEmpty() &&
-                ctx.players.local().animation() == -1;
+                !ctx.players.local().inMotion();
     }
 
     @Override
     public void execute() {
-        Npc chicken = ctx.npcs.poll();
         System.out.println(chicken);
         chicken.interact("Attack");
     }
