@@ -13,11 +13,13 @@ public class Loot extends Task<ClientContext> {
 
     int feather = 314;
     int bones = 526;
+    
+    private final int loot[] = {314,526};
 
     @Override
     public boolean activate() {
-        return !ctx.groundItems.select(9).id(feather, bones).isEmpty() // Activate if we have items to be picking up
-        && ctx.backpack.select().count() >= 28;
+        return !ctx.groundItems.select(9).id(loot).isEmpty() // Activate if we have items to be picking up
+        && ctx.backpack.select().count() < 28; //Could also be != 28
     }
 
     @Override
