@@ -10,7 +10,7 @@ public class Bank extends Task<ClientContext> {
 
     @Override
     public boolean activate() {
-        return !ctx.bank.opened() && ctx.bank.nearest().inViewport() && ctx.backpack.select().count() > 0;
+        return !ctx.bank.opened() &&  ctx.bank.inViewport() && ctx.backpack.select().count() > 0;
     }
 
     @Override
